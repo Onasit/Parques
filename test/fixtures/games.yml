@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  primero_en_matar: MyString
+  primero_em_morir: MyString
+  primero_en_salir: MyString
+  ultimo_en_salir: MyString
+  player: one
+
+two:
+  primero_en_matar: MyString
+  primero_em_morir: MyString
+  primero_en_salir: MyString
+  ultimo_en_salir: MyString
+  player: two
