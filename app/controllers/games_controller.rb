@@ -21,6 +21,7 @@ class GamesController < ApplicationController
     end
 
     private
+    
     def game_params
         params.require(:game).permit(:players, player_games_attributes: [:player_id])
     end
