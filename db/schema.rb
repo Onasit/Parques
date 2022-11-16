@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_15_151354) do
+ActiveRecord::Schema.define(version: 2022_11_15_145401) do
 
   create_table "deaths", force: :cascade do |t|
     t.string "assassin"
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 2022_11_15_151354) do
     t.boolean "paused"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "players"
     t.index ["player_id"], name: "index_games_on_player_id"
   end
 
