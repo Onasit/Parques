@@ -1,4 +1,4 @@
 class Death < ApplicationRecord
-  belongs_to :player
-  belongs_to :victima, class_name: "Player"
+  belongs_to :assasin, class_name: "Player"
+  belongs_to :victim, class_name: "Player"
 end
