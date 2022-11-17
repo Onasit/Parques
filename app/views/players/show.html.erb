@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <%= image_tag (@player.image).to_s , style: 'width:100%' %>
+        </div>
+        <div class="col-md-5">
+            <p><%= @player.name %></p>
+            <p><%= @player.color %></p>
+            
+                <div>
+                    <% if current_player == @player%>
+                        <%= link_to 'Editar', edit_player_registration_path, class: 'btn btn-warning'%>
+                    <% end %>
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        <%= link_to 'Volver', players_path, class: 'btn btn-secondary my-3' %>
+    </div>
+</div>
