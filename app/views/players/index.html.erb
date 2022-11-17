@@ -1,10 +1,18 @@
-<div>
-<ul>
-  <% @players.each do |player| %>
-    <li><%= player.name %></li>
-  <% end %>
-</ul>
+
+<div class="row">
+    <% @players.each do |player| %>
+            
+            <div class="col-md-2">
+                <div class="card mb-4 shadow-sm text-center">
+                    <%= image_tag (player.image).to_s %>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <%= player.name %>
+                        </p>
+                        <%= link_to 'Estadisticas', index_path, class: 'btn btn-warning' %>
+                    </div>
+                </div>
+            </div>
+        
+    <% end %>
 </div>
-
-
-<%= link_to "Logout", destroy_player_session_path, method: :delete %>

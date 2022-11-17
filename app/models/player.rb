@@ -3,6 +3,8 @@ class Player < ApplicationRecord
   has_many :player_games
   has_many :games, through: :player_games
 
+  mount_uploader :image, PlayerUploader
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

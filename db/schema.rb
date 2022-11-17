@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_15_145401) do
+ActiveRecord::Schema.define(version: 2022_11_17_144013) do
 
   create_table "deaths", force: :cascade do |t|
     t.string "assassin"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2022_11_15_145401) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "color"
     t.index ["email"], name: "index_players_on_email", unique: true
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true
   end
