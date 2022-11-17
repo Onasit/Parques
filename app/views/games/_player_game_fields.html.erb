@@ -1,0 +1,7 @@
+<div class="nested-fields">
+    <div class="field">
+        <%= f.label :Player %> <br>
+        <%= f.select :player_id, options_from_collection_for_select(Player.all, :id, :name) %>
+    </div>
+    <%= link_to_remove_association "remove Player", f %>
+</div>
