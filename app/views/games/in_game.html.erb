@@ -1,3 +1,27 @@
+<div class="row">
+  <div class="col-md-2 ">
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Asesino</th>
+          <th scope="col">Victima</th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @deaths.each do |death| %>
+          <tr>
+            <td><%= death.assassin.name %></td>
+            <td><%= death.victim.name %></td>
+
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <% @deaths.each do |death| %>
   <%= "#{death.assassin.name} mato a #{death.victim.name}" %>
   <br>
