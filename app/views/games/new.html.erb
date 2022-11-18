@@ -16,6 +16,9 @@
       <%= form.fields_for :player_games do |player_game| %>
         <%= render 'player_game_fields', f: player_game %>
       <% end %>
+      <br>
+      <br>
+      <br>
       <%= link_to_add_association "add Player", form, :player_games %>
     </div>
 
