@@ -10,14 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_17_144013) do
+ActiveRecord::Schema.define(version: 2022_11_18_133318) do
 
   create_table "deaths", force: :cascade do |t|
-    t.string "assassin"
-    t.string "victim"
     t.integer "player_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "victim_id", null: false
+    t.boolean "first_blood", default: false
+    t.integer "assassin_id", null: false
     t.index ["player_id"], name: "index_deaths_on_player_id"
   end
 
