@@ -1,0 +1,18 @@
+
+<div class="row">
+    <% @games.each do |game| %>
+            
+            <div class="col-md-2">
+                <div class="card mb-4 shadow-sm text-center">
+   
+                    <div class="card-body">
+                        <p class="card-text">
+                            <%= game.id %>
+                        </p>
+                        <%= link_to 'Edit', in_game_game_path(game), class: 'btn btn-primary' %>
+                    </div>
+                </div>
+            </div>
+        
+    <% end %>
+</div>

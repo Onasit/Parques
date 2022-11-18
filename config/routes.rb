@@ -5,7 +5,13 @@ Rails.application.routes.draw do
     sign_up: "register"
   }
   resources :players
-  resources :games
+  resources :games do 
+    member do
+      get :in_game
+    end
+  end
+
+  resources :deaths, only: [:create]
 # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 #root to: "home#index"

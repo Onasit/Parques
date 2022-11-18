@@ -10,16 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_18_133318) do
+ActiveRecord::Schema.define(version: 2022_11_18_165532) do
 
   create_table "deaths", force: :cascade do |t|
-    t.integer "player_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "victim_id", null: false
     t.boolean "first_blood", default: false
     t.integer "assassin_id", null: false
-    t.index ["player_id"], name: "index_deaths_on_player_id"
+    t.integer "game_id", null: false
   end
 
   create_table "games", force: :cascade do |t|
@@ -60,7 +59,6 @@ ActiveRecord::Schema.define(version: 2022_11_18_133318) do
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "deaths", "players"
   add_foreign_key "games", "players"
   add_foreign_key "player_games", "games"
   add_foreign_key "player_games", "players"
