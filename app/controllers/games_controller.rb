@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
 
-    before_action :set_game, only: [:in_game]
+    before_action :set_game, only: [:in_game, :update]
     
     def index
         @games = Game.all
@@ -23,6 +23,14 @@ class GamesController < ApplicationController
         end
     end
 
+    def update 
+        if @game.update(game_params)
+            redirect_to games_path, notice:"Juego guardado"
+        else
+            render :in_game
+        end
+    end
+
     def in_game
        @death =  Death.new(game_id: @game.id)
        #@death = @game.deaths.build
@@ -36,7 +44,7 @@ class GamesController < ApplicationController
     end
     
     def game_params
-        params.require(:game).permit(:players, player_games_attributes: [:player_id, :_destroy])
+        params.require(:game).permit(:players, :player_id, player_games_attributes: [:player_id, :_destroy])
         
     end
 end

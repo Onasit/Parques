@@ -3,6 +3,7 @@
     <table class="table table-striped">
       <thead class="thead-dark">
         <tr>
+          <th scope="col">#</th>
           <th scope="col">Asesino</th>
           <th scope="col">Victima</th>
 
@@ -10,8 +11,9 @@
       </thead>
 
       <tbody>
-        <% @deaths.each do |death| %>
+        <% @deaths.each_with_index do |death, index| %>
           <tr>
+            <td ><%= index + 1 %></td>
             <td><%= death.assassin.name %></td>
             <td><%= death.victim.name %></td>
 
@@ -22,44 +24,63 @@
   </div>
 </div>
 
-<% @deaths.each do |death| %>
-  <%= "#{death.assassin.name} mato a #{death.victim.name}" %>
-  <br>
-<% end %>
 
-<%= form_with(model: @death) do |form| %>
-    <% if @death.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@death.errors.count, "error") %> prohibited thid death from beging saved: </h2>
+<% if @game.player_id.blank? %>
+    <%= form_with(model: @death) do |form| %>
+        <% if @death.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@death.errors.count, "error") %> prohibited thid death from beging saved: </h2>
 
-          <ul>
-              <% @death.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-          </ul>
+              <ul>
+                  <% @death.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+              </ul>
+            </div>
+        <% end %>
+
+        <div class="field">
+          <%= form.label :Assassin %> <br>
+          <%= form.select :assassin_id, options_from_collection_for_select(@game.players, :id, :name) %>
+        </div>
+
+        <div class="field">
+          <%= form.label :Victim %> <br>
+          <%= form.select :victim_id, options_from_collection_for_select(@game.players, :id, :name) %>
+        </div>
+
+        <div class="field">
+          <%= form.hidden_field :game_id, value: @game.id %>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <%= form.submit 'Añadir muerte', class: 'btn btn-primary btn-block' %>
+            </div>
+          </div>
         </div>
     <% end %>
 
-    <div class="field">
-      <%= form.label :Assassin %> <br>
-      <%= form.select :assassin_id, options_from_collection_for_select(@game.players, :id, :name) %>
-    </div>
+      <%= form_with(model: @game) do |form| %>
+      <div class="field">
+        <%= form.label :Ganador %> <br>
+        <%= form.select :player_id, options_from_collection_for_select(@game.players, :id, :name) %>
+      </div>
 
-    <div class="field">
-      <%= form.label :Victim %> <br>
-      <%= form.select :victim_id, options_from_collection_for_select(@game.players, :id, :name) %>
-    </div>
-
-    <div class="field">
-      <%= form.hidden_field :game_id, value: @game.id %>
-    </div>
-
-
-    <div class="row">
-      <div class="col-md-12">
-        <div class="form-group">
-          <%= form.submit 'Guardar', class: 'btn btn-primary btn-block' %>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <%= form.submit 'Terminar juego', class: 'btn btn-primary btn-block' %>
+          </div>
         </div>
       </div>
-    </div>
+
+    <% end %>
+
+<% else %>
+    
+    <p>Partida terminada, el ganador fue <%= @game.winner.name %></p>
+    <%= link_to 'Volver', games_path, class: 'btn btn-secondary' %>
 <% end %>

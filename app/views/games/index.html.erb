@@ -9,7 +9,12 @@
                         <p class="card-text">
                             <%= game.id %>
                         </p>
-                        <%= link_to 'Edit', in_game_game_path(game), class: 'btn btn-primary' %>
+                        <% if game.player_id.blank? %>
+                            <%= link_to 'Edit', in_game_game_path(game), class: 'btn btn-primary' %>
+                        <% else %>
+                            <p>Partida terminada</p>
+                            <%= link_to 'Detalles', in_game_game_path(game), class: 'btn btn-secondary' %>
+                        <% end %>
                     </div>
                 </div>
             </div>
