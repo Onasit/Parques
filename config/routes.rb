@@ -4,7 +4,11 @@ Rails.application.routes.draw do
     sign_out: "logout",
     sign_up: "register"
   }
-  resources :players
+  resources :players do 
+    collection do
+      get :score
+    end
+  end
   resources :games do 
     member do
       get :in_game

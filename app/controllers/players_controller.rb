@@ -8,6 +8,9 @@ class PlayersController < ApplicationController
 
     def show
     end
+    def score
+        @players = Player.all
+    end
 
     private
     def set_player
