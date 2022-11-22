@@ -7,9 +7,11 @@ class PlayersController < ApplicationController
     end
 
     def show
+       
     end
     def score
-        @players = Player.all
+        @players = Player.all.sort_by{|e| e.won_games.count}.reverse
+        #@players = Player.all.order() -- ordenar por un atributo
     end
 
     private

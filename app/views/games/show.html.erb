@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <h1>Jugadores</h1>
+        <% @game.players.each do |player| %>
+            <div class="col-md-2">
+                
+                <div class="card mb-4 shadow-sm text-center">
+                    <%= image_tag (player.image).to_s  %>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <%= player.name %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+
+        <div class="col-md-4 ">
+            <div class="col-md-2 ">
+                <h1>Muertes</h1>
+                <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                    <th scope="col">Asesino</th>
+                    <th scope="col">Victima</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% @deaths.each do |death| %>
+                    <tr>
+                        <td><%= death.assassin.name %></td>
+                        <td><%= death.victim.name %></td>
+
+                    </tr>
+                    <% end %>
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,17 +1,37 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-7">
-            <%= image_tag (@player.image).to_s , style: 'width:100%' %>
+        <div class="col-md-5">
+            <%= image_tag (@player.image).to_s , style: 'width:50%' %>
         </div>
         <div class="col-md-5">
-            <p><%= @player.name %></p>
-            <p><%= @player.color %></p>
-            
-                <div>
-                    <% if current_player == @player%>
-                        <%= link_to 'Editar', edit_player_registration_path, class: 'btn btn-warning'%>
-                    <% end %>
-                </div>
+            <h1><%= @player.name %></h1>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                    <th scoope="col">Color</th>
+                    <th scoope="col">Puntos</th>
+                    <th scoope="col">Asesinatos</th>
+                    <th scoope="col">Muertes</th>
+                    <th scoope="col">Esperanzas%</th>
+                    <th scoope="col" colspan="3"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td><%= @player.color %></td>
+                        <td><%= @player.won_games.count %></td>
+                        <td><%= @player.assassin_counter %></td>
+                        <td><%= @player.victim_counter %></td>
+                        <td><%= rand(100) %></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <% if current_player == @player%>
+                    <%= link_to 'Editar', edit_player_registration_path, class: 'btn btn-warning'%>
+                <% end %>
+            </div>
         </div>
     </div>
     <div class="row">
