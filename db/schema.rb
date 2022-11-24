@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2022_11_24_160330) do
     t.string "primero_em_morir"
     t.string "primero_en_salir"
     t.string "ultimo_en_salir"
-    t.integer "player_id"
+    t.bigint "player_id"
     t.datetime "date_and_time"
     t.boolean "paused"
     t.datetime "created_at", precision: 6, null: false
@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(version: 2022_11_24_160330) do
   end
 
   create_table "player_games", force: :cascade do |t|
-    t.integer "player_id", null: false
-    t.integer "game_id", null: false
+    t.bigint "player_id", null: false
+    t.bigint "game_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["game_id"], name: "index_player_games_on_game_id"
