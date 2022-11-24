@@ -12,7 +12,7 @@
 
       <tbody>
         <% @deaths.each_with_index do |death, index| %>
-          <tr>
+          <tr style="background-color: <%= death.soplo ? 'red' : '' %>">
             <td ><%= index + 1 %></td>
             <td><%= death.assassin.name %></td>
             <td><%= death.victim.name %></td>
@@ -22,7 +22,33 @@
       </tbody>
     </table>
   </div>
+
+  <div class="col-md-4 ">
+      <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          
+          <th scope="col">Jugador</th>
+          <th scope="col">Estado financiero</th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @game.player_games.each do |pj| %>
+          <tr>
+
+            <td><%= pj.player.name %></td> 
+            <td>$<%= pj.cash %></td>
+
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+
 
 
 <% if @game.player_id.blank? %>
@@ -48,6 +74,14 @@
           <%= form.label :Victim %> <br>
           <%= form.select :victim_id, options_from_collection_for_select(@game.players, :id, :name) %>
         </div>
+        <br>
+
+        <div class="field">
+          <%= form.label :soplo, "Soplo?" %> <br>
+          <%= form.check_box :soplo %>
+        </div>
+
+
 
         <div class="field">
           <%= form.hidden_field :game_id, value: @game.id %>
@@ -81,6 +115,6 @@
 
 <% else %>
     
-    <p>Partida terminada, el ganador fue <%= @game.winner.name %></p>
+    <p>Partida terminada, el ganador fue <%= @game.winner.name %> y ganó $<%= @game.player_games.where(player_id: @game.winner.id).first.winner_cash %> </p>
     <%= link_to 'Volver', games_path, class: 'btn btn-secondary' %>
 <% end %>

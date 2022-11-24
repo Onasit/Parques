@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_22_171355) do
+ActiveRecord::Schema.define(version: 2022_11_24_160330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2022_11_22_171355) do
     t.boolean "first_blood", default: false
     t.integer "assassin_id", null: false
     t.integer "game_id", null: false
+    t.boolean "soplo", default: false
   end
 
   create_table "games", force: :cascade do |t|
