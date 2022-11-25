@@ -27,8 +27,8 @@
         <td><%= player.won_games.count %></td>
         <td><%= player.assassin_counter %></td>
         <td><%= player.victim_counter %></td>
-        <td><%= verdugo.first %>: <%= verdugo.last %></td>
-        <td><%= presa.first %>: <%= presa.last %></td>
+        <td><%= verdugo&.first %>: <%= verdugo&.last %></td>
+        <td><%= presa&.first %>: <%= presa&.last %></td>
         <td><%= player.finanzas %></td>
       </tr>
     <% end %>
