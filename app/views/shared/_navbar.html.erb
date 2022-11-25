@@ -10,6 +10,10 @@
                 </li>
 
                 <li class="nav-item">
+                    <%= link_to 'Posiciones', score_players_path, class: "nav-link" %>
+                </li>
+   
+                <li class="nav-item">
                     <%= link_to 'Juegos', games_path, class: "nav-link" %>
                 </li>
 
@@ -17,16 +21,30 @@
 
                
                 <% if current_player %>
-                    <%= link_to 'Cerrar sesión', destroy_player_session_path, method: :delete, class: "nav-link" %>
-                    <%= link_to 'Editar perfil', edit_player_registration_path, class: "nav-link" %>
-                    <%= link_to 'Nuevo Juego ', new_game_path, class: "nav-link" %>
+                    <li class="nav-item">
+                        <%= link_to 'Nuevo Juego ', new_game_path, class: "nav-link" %>
+                    </li>
+
+                    <li class="nav-item">
+                        <%= link_to 'Editar perfil', edit_player_registration_path, class: "nav-link" %>
+                    </li>
+
+                    
+                    <li class="nav-item">
+                        <%= link_to 'Cerrar sesión', destroy_player_session_path, method: :delete, class: "nav-link" %>
+                    </li>
+                    
 
                 <% else %>
-                    <%= link_to 'Registrarse', new_player_registration_path, class: "nav-link" %>
-                    <%= link_to ' Ingresar', edit_player_registration_path, class: "nav-link" %>
+                    <li class="nav-item">
+                        <%= link_to 'Registrarse', new_player_registration_path, class: "nav-link" %>
+                    </li>
+
+                    <li class="nav-item">
+                        <%= link_to ' Ingresar', edit_player_registration_path, class: "nav-link" %>
+                    </li>
                 <% end %>
 
-                <%= link_to 'Posiciones', score_players_path, class: "nav-link" %>
             </ul>
         
         </div>

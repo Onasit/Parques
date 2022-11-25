@@ -27,6 +27,48 @@
                     </tr>
                 </tbody>
             </table>
+
+            <table class="table table-striped">
+            
+                <thead class="thead-dark">
+                    <tr>
+                        <th scoope="col">Verdugos</th>
+                        <th scoope="col">Numero de muertes</th>
+                        <th scoope="col" colspan="3"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% @player.verdugos.each do |verdugo, muertes| %>
+                        <tr>
+                            <td><%= verdugo %></td>
+                            <td><%= muertes %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            
+            </table> 
+
+            <table class="table table-striped">
+            
+                <thead class="thead-dark">
+                    <tr>
+                        <th scoope="col">Presas</th>
+                        <th scoope="col">Numero de muertes</th>
+                        <th scoope="col" colspan="3"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% @player.presas.each do |presa, muertes| %>
+                        <tr>
+                            <td><%= presa %></td>
+                            <td><%= muertes %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            
+            </table>           
             <div>
                 <% if current_player == @player%>
                     <%= link_to 'Editar', edit_player_registration_path, class: 'btn btn-warning'%>

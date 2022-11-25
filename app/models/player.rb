@@ -46,4 +46,36 @@ class Player < ApplicationRecord
     finanzas_games_ganados + finanzas_muertes - finanzas_games_perdidos
   end
 
+  def verdugos
+    verdugos = []
+    Death.where(victim_id: self.id).each do |muertes|
+      verdugos.push(muertes.assassin.name)
+    end
+
+    verdugos_hash = Hash.new(0)
+
+    verdugos.each do |asesino|
+      verdugos_hash[asesino] += 1
+    end
+
+    verdugos_hash.sort_by{|verdugo, muertes| muertes}.reverse.to_h
+  end
+
+  def presas
+    presas = []
+    Death.where(assassin_id: self.id).each do |muertes|
+      presas.push(muertes.victim.name)
+    end
+
+    presas_hash = Hash.new(0)
+
+    presas.each do |victima|
+      presas_hash[victima] += 1
+    end
+
+    presas_hash.sort_by{|presa, muertes| muertes}.reverse.to_h
+  end
+
+
+
 end
