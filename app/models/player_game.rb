@@ -19,4 +19,5 @@ class PlayerGame < ApplicationRecord
   end
 
 
+
 end
