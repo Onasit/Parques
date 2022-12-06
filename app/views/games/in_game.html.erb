@@ -79,10 +79,10 @@
             <td><%= death.assassin.name %></td>
             <td><%= death.victim.name %></td>
             <% if death.assassin_pig %>
-              <td><%= image_tag("cerdo_feliz", style: "width: 50%; height: 50%;") %></td>
+              <td><%= image_tag(asset_path("cerdo_feliz"), style: "width: 50%; height: 50%;") %></td>
             <% end %>
             <% if death.victim_pig %>
-                <td><%= image_tag("cerdo_enojado", style: "width: 60%; height: 60%;") %></td>
+                <td><%= image_tag(asset_path("cerdo_enojado"), style: "width: 60%; height: 60%;") %></td>
             <% end%>
 
           </tr>
