@@ -11,6 +11,6 @@ class DeathsController < ApplicationController
     private
 
     def death_params
-        params.require(:death).permit(:assassin_id, :victim_id, :game_id, :soplo)
+        params.require(:death).permit(:assassin_id, :victim_id, :game_id, :soplo, :zone, :assassin_pig, :victim_pig)
     end
 end 
