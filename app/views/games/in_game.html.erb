@@ -79,10 +79,10 @@
             <td><%= death.assassin.name %></td>
             <td><%= death.victim.name %></td>
             <% if death.assassin_pig %>
-              <td><%= image_tag(asset_path("cerdo_feliz"), style: "width: 50%; height: 50%;") %></td>
+              <td><%= image_tag(asset_path("cerdo_feliz.jpeg"), style: "width: 50%; height: 50%;") %></td>
             <% end %>
             <% if death.victim_pig %>
-                <td><%= image_tag(asset_path("cerdo_enojado"), style: "width: 60%; height: 60%;") %></td>
+                <td><%= image_tag(asset_path("cerdo_enojado.png"), style: "width: 60%; height: 60%;") %></td>
             <% end%>
 
           </tr>
@@ -95,7 +95,7 @@
       <table class="table table-striped">
       <thead class="thead-dark">
         <tr>
-          
+
           <th scope="col">Jugador</th>
           <th scope="col">Estado financiero</th>
 
@@ -106,7 +106,7 @@
         <% @game.player_games.each do |pj| %>
           <tr>
 
-            <td><%= pj.player.name %></td> 
+            <td><%= pj.player.name %></td>
             <td>$<%= pj.cash %></td>
 
           </tr>
@@ -137,7 +137,7 @@
             <% @game.player_games.each do |player| %>
               <td><%= Death.where(assassin_id: pj.player.id, victim_id: player.player.id,game_id: @game.id).count %></td>
             <% end %>
-            
+
             <td><%= Death.where(assassin_id: pj.player.id, game_id: @game.id).count %></td>
 
           </tr>
