@@ -18,6 +18,4 @@ class PlayerGame < ApplicationRecord
     game_cash * self.game.players.count
   end
 
-
-
 end

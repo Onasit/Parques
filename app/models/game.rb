@@ -6,8 +6,11 @@ class Game < ApplicationRecord
   
   accepts_nested_attributes_for :player_games, allow_destroy: true
 
+  validate :validate_player_uniqueness
+
   validates :game_cash, :death_cash, presence: true
   validate :check_players
+  
 
   validate :repeat_players
 
@@ -17,9 +20,10 @@ class Game < ApplicationRecord
 
   def check_players
     if self.player_games.size < 2 
-      errors.add(:base, "No a inscrito suficientes jugadores")
+      errors.add(:base, "No ha inscrito suficientes jugadores")
     end
   end
+
 
   def winner
     Player.find(self.player_id)
@@ -37,4 +41,10 @@ class Game < ApplicationRecord
   end
 
   
+  def validate_player_uniqueness
+    unless self.player_games.uniq == self.player_games
+      errors.add(:base, "No se puede repetir jugadores")
+    end
+  end
+
 end

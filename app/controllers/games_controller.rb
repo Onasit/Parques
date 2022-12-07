@@ -35,11 +35,13 @@ class GamesController < ApplicationController
         @deaths = @game.deaths
     end
 
-    def in_game
+    
 
-            @death =  Death.new(game_id: @game.id)
-            #@death = @game.deaths.build
-            @deaths = @game.deaths
+    def in_game
+        @death =  Death.new(game_id: @game.id)
+        @deaths = @game.deaths
+        #@death = @game.deaths.build
+            
     end
 
     private
