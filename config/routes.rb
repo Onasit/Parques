@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     end
   end
 
+  put "estado/:id", to: "games#estado", as: "estado"
+
   resources :deaths, only: [:create]
 # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 

@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
 
-    before_action :set_game, only: [:in_game, :show, :update]
+    before_action :set_game, only: [:in_game, :show, :update, :estado]
     
     def index
         @games = Game.all
@@ -42,6 +42,20 @@ class GamesController < ApplicationController
         @deaths = @game.deaths
         #@death = @game.deaths.build
             
+    end
+
+    def estado
+        
+        @game.paused = !@game.paused
+        if @game.paused == true
+            @game.pauser_id = current_player.id
+        else
+            @game.pauser_id = nil
+        end
+        @game.save
+
+
+        redirect_to in_game_game_path(@game)
     end
 
     private

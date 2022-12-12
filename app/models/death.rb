@@ -1,6 +1,7 @@
 class Death < ApplicationRecord
   belongs_to :assassin, class_name: "Player", foreign_key: "assassin_id"
   belongs_to :victim, class_name: "Player", foreign_key: "victim_id"
+  belongs_to :zone_death, class_name: "Player", foreign_key: "zone"
   belongs_to :game
 
   before_save :check_first_blood

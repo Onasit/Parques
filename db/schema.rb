@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_06_130149) do
+ActiveRecord::Schema.define(version: 2022_12_12_174905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,17 +29,14 @@ ActiveRecord::Schema.define(version: 2022_12_06_130149) do
   end
 
   create_table "games", force: :cascade do |t|
-    t.string "primero_en_matar"
-    t.string "primero_em_morir"
-    t.string "primero_en_salir"
-    t.string "ultimo_en_salir"
     t.bigint "player_id"
     t.datetime "date_and_time"
-    t.boolean "paused"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "death_cash", null: false
     t.integer "game_cash", null: false
+    t.boolean "paused", default: false
+    t.integer "pauser_id"
     t.index ["player_id"], name: "index_games_on_player_id"
   end
 
