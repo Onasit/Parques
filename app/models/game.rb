@@ -8,7 +8,7 @@ class Game < ApplicationRecord
 
   validate :validate_player_uniqueness
 
-  validates :game_cash, :death_cash, presence: true
+  validates :game_cash, :death_cash, :first_blood_cash_victim, :first_blood_cash_players, presence: true
   validate :check_players
   
 

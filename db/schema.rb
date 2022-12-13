@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_12_174905) do
+ActiveRecord::Schema.define(version: 2022_12_13_140342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 2022_12_12_174905) do
     t.integer "game_cash", null: false
     t.boolean "paused", default: false
     t.integer "pauser_id"
+    t.integer "first_blood_cash_victim"
+    t.integer "first_blood_cash_players"
     t.index ["player_id"], name: "index_games_on_player_id"
   end
 

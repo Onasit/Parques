@@ -65,7 +65,7 @@ class GamesController < ApplicationController
     end
     
     def game_params
-        params.require(:game).permit(:players, :player_id, :death_cash, :game_cash, player_games_attributes: [:player_id, :_destroy])
+        params.require(:game).permit(:players, :player_id, :death_cash, :game_cash, :first_blood_cash_victim, :first_blood_cash_players, player_games_attributes: [:player_id, :_destroy])
         
     end
 end
