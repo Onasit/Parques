@@ -76,6 +76,22 @@ class Player < ApplicationRecord
     presas_hash.sort_by{|presa, muertes| muertes}.reverse.to_h
   end
 
+  def racha_victorias
+    contador = 0
+    racha_maxima = 0
+    Game.pluck(:player_id). each do |ganador_id|
+      if self.id == ganador_id
+        contador = contador + 1
+        if contador > racha_maxima
+          racha_maxima = contador
+        end
+      else 
+        contador = 0
+      end
+    end
+      racha_maxima
+  end
+
 
 
 end
