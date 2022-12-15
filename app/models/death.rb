@@ -9,7 +9,8 @@ class Death < ApplicationRecord
   validate :auto_kill
 
   validate :soplo_cochinas
-
+  
+  scope :first_blood, -> { where(first_blood: true) }
 
   def check_first_blood
     if game.deaths.blank?

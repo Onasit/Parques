@@ -6,9 +6,11 @@
                 <div class="card mb-4 shadow-sm text-center">
    
                     <div class="card-body">
-                        <p class="card-text">
-                            <%= game.id %>
-                        </p>
+                        <b class="card-text, text-info">
+                            <%= data_game(game) %>
+                        </b>
+                        <br>
+                        <br>
                         <% if game.player_id.blank? %>
                             <%= link_to 'Edit', in_game_game_path(game), class: 'btn btn-primary' %>
                         <% else %>
@@ -21,3 +23,4 @@
         
     <% end %>
 </div>
+

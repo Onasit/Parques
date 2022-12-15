@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
 
-    before_action :set_game, only: [:in_game, :show, :update, :estado]
+    before_action :set_game, only: [:in_game, :update, :estado]
     
     def index
         @games = Game.all
@@ -31,12 +31,6 @@ class GamesController < ApplicationController
         end
     end
     
-    def show
-        @deaths = @game.deaths
-    end
-
-    
-
     def in_game
         @death =  Death.new(game_id: @game.id)
         @deaths = @game.deaths
