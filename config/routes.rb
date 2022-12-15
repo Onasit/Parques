@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :players, path: "", path_names: {
     sign_in: "login",
     sign_out: "logout",
-    sign_up: "register"
+    #sign_up: "register"
   }
   resources :players do 
     collection do

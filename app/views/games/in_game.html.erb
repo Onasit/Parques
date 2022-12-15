@@ -1,16 +1,15 @@
-<% if @game.player_id.blank? && !@game.paused? %>
+<% if @game.player_id.blank? && !@game.paused? && !current_player.blank? %>
   <%= form_with(model: @death) do |form| %>
-      <% if @death.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@death.errors.count, "error") %> prohibited thid death from beging saved: </h2>
-
-            <ul>
-                <% @death.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-            </ul>
-          </div>
-      <% end %>
+    <% if @death.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@death.errors.count, "error") %> prohibited thid death from beging saved: </h2>
+          <ul>
+            <% @death.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+      </div>
+    <% end %>
 
       <div class="field">
         <%= form.label :Assassin, "Asesino" %> <br>
@@ -26,8 +25,7 @@
         <%= form.label :zone, "Zona de muerte" %> <br>
         <%= form.select :zone, options_from_collection_for_select(@game.players, :id, :name) %>
       </div>
-
-
+      
       <br>
 
       <div class="field">
@@ -45,12 +43,9 @@
         <%= form.check_box :victim_pig %>
       </div>
 
-
-
       <div class="field">
         <%= form.hidden_field :game_id, value: @game.id %>
       </div>
-
 
       <div class="row">
         <div class="col-md-12">
@@ -59,12 +54,12 @@
           </div>
         </div>
       </div>
+
+      <a>
+        <%= link_to 'Pausar', estado_path(@game), method: :put, data: { confirm: '¿Seguro quieres Pausar?' }, class: 'btn btn-primary my-3' %>
+      </a>
+
   <% end %>
-
-
-  <a>
-  <%= link_to 'Pausar', estado_path(@game), method: :put, data: { confirm: '¿Seguro quieres Pausar?' }, class: 'btn btn-primary my-3' %>
-  </a>
   
 
 <% end %>
@@ -168,7 +163,7 @@
       <p><%= mensaje_final(@game) %> </p>
       <%= link_to 'Volver', games_path, class: 'btn btn-secondary' %>
 
-  <% when @game.paused? %>
+  <% when @game.paused? && !current_player.blank? %>
       <p>Partida pausada por <%= "hola" %>  </p>
       <% if @game.pauser_id == current_player.id %>
         <%= link_to 'Reanudar', estado_path(@game), method: :put, data: { confirm: '¿Quieres reanudar?' }, class: 'btn btn-primary my-3' %>
@@ -177,7 +172,7 @@
       <% end %>
       <%= link_to 'Volver', games_path, class: 'btn btn-secondary' %>
 
-  <% when @game.player_id.blank? && !@game.paused? %>
+  <% when @game.player_id.blank? && !@game.paused? && !current_player.blank? %>
       <%= form_with(model: @game) do |form| %>
         <div class="field">
           <%= form.label :Ganador %> <br>

@@ -1,54 +1,64 @@
-<%= form_with(model: @game) do |form| %>
-    <% if @game.errors.any? %>
-        <div id="error_explanation">
-        <h2><%= pluralize(@game.errors.count, "error") %> prohibited thid game from beging saved: </h2>
+<% if !current_player.blank? %>
+  <%= form_with(model: @game) do |form| %>
+      <% if @game.errors.any? %>
+          <div id="error_explanation">
+          <h2><%= pluralize(@game.errors.count, "error") %> prohibited thid game from beging saved: </h2>
 
-        <ul>
-            <% @game.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-            <% end %>
-        </ul>
-        </div>
-   <% end %>
+          <ul>
+              <% @game.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+              <% end %>
+          </ul>
+          </div>
+    <% end %>
 
-    <div class="form-group">
-      <%= form.label :Players %>
-      <%= form.fields_for :player_games do |player_game| %>
-        <%= render 'player_game_fields', f: player_game %>
-      <% end %>
-      <br>
-      <br>
-      <br>
-      <%= link_to_add_association "add Player", form, :player_games %>
-    </div>
-
-    <div class="field">
-      <%= form.label :death_cash, "Valor de la muerte" %><br />
-      <%= form.text_field :death_cash %>
-    </div>
-    <br>
-    <div class="field">
-      <%= form.label :game_cash, "Valor del case" %><br />
-      <%= form.text_field :game_cash %>
-    </div>
-    <br>
-    <div class="field">
-      <%= form.label :first_blood_cash_victim, "Primera sangre (victima)" %><br />
-      <%= form.text_field :first_blood_cash_victim %>
-    </div>
-    <br>
-    <div class="field">
-      <%= form.label :first_blood_cash_players, "Primera sangre (resto de jugadores)" %><br />
-      <%= form.text_field :first_blood_cash_players %>
-    </div>
-
-
-
-  <div class="row">
-    <div class="col-md-12">
       <div class="form-group">
-        <%= form.submit 'Guardar', class: 'btn btn-primary btn-block' %>
+        <%= form.label :Players %>
+        <%= form.fields_for :player_games do |player_game| %>
+          <%= render 'player_game_fields', f: player_game %>
+        <% end %>
+        <br>
+        <br>
+        <br>
+        <%= link_to_add_association "add Player", form, :player_games %>
+      </div>
+
+      <div class="field">
+        <%= form.label :death_cash, "Valor de la muerte" %><br />
+        <%= form.text_field :death_cash %>
+      </div>
+      <br>
+      <div class="field">
+        <%= form.label :game_cash, "Valor del case" %><br />
+        <%= form.text_field :game_cash %>
+      </div>
+      <br>
+      <div class="field">
+        <%= form.label :first_blood_cash_victim, "Primera sangre (victima)" %><br />
+        <%= form.text_field :first_blood_cash_victim %>
+      </div>
+      <br>
+      <div class="field">
+        <%= form.label :first_blood_cash_players, "Primera sangre (resto de jugadores)" %><br />
+        <%= form.text_field :first_blood_cash_players %>
+      </div>
+
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= form.submit 'Guardar', class: 'btn btn-primary btn-block' %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
+
+  <% else %>
+  
+    <p style="background-color:#4653e8;color:black;text-align:center;padding:10px;">
+        Desbes ingresar para crear un juego 
+    </p>
+    <%= link_to 'Ingresar', new_player_session_path, class: 'btn btn-secondary' %>
+
 <% end %>
