@@ -164,11 +164,9 @@
       <%= link_to 'Volver', games_path, class: 'btn btn-secondary' %>
 
   <% when @game.paused? && !current_player.blank? %>
-      <p>Partida pausada por <%= "hola" %>  </p>
+      <p>Partida pausada por <%= Player.find(@game.pauser_id).name %>  </p>
       <% if @game.pauser_id == current_player.id %>
         <%= link_to 'Reanudar', estado_path(@game), method: :put, data: { confirm: '¿Quieres reanudar?' }, class: 'btn btn-primary my-3' %>
-      <% else %>
-        <%= "Holaa" %>
       <% end %>
       <%= link_to 'Volver', games_path, class: 'btn btn-secondary' %>
 
