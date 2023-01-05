@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_15_153223) do
+ActiveRecord::Schema.define(version: 2023_01_05_165059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2022_12_15_153223) do
     t.integer "pauser_id"
     t.integer "first_blood_cash_victim", default: 0
     t.integer "first_blood_cash_players", default: 0
+    t.integer "season_id"
     t.index ["player_id"], name: "index_games_on_player_id"
   end
 
@@ -65,6 +66,14 @@ ActiveRecord::Schema.define(version: 2022_12_15_153223) do
     t.text "imagen_url"
     t.index ["email"], name: "index_players_on_email", unique: true
     t.index ["reset_password_token"], name: "index_players_on_reset_password_token", unique: true
+  end
+
+  create_table "seasons", force: :cascade do |t|
+    t.integer "prize"
+    t.integer "player_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "completed", default: false
   end
 
   add_foreign_key "games", "players"

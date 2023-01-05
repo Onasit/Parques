@@ -12,6 +12,8 @@ class GamesController < ApplicationController
     
     def create
         @game = Game.new(game_params)
+        season = Season.where(completed: false).first
+        @game.season = season
         
         respond_to do |format|
             if @game.save

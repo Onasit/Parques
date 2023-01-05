@@ -92,6 +92,8 @@ class Player < ApplicationRecord
       racha_maxima
   end
 
-
+  def soplos
+    Death.where(victim_id: self.id, soplo: true).count
+  end
 
 end

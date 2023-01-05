@@ -3,6 +3,7 @@ class Game < ApplicationRecord
   has_many :player_games, dependent: :destroy
   has_many  :players, through: :player_games
   has_many :deaths, dependent: :destroy
+  belongs_to :season
 
 
 
@@ -19,7 +20,7 @@ class Game < ApplicationRecord
   validate :repeat_players
 
 
-
+  #after_save :check_end_season
 
 
   def check_players
@@ -28,6 +29,18 @@ class Game < ApplicationRecord
     end
   end
 
+  def check_end_season
+    games = self.season.games.where.not(player_id: nil)
+    player_ids = games.collect(&:player_id)
+
+    hash_result = Hash.new(0)
+
+    player_ids.each do |player_id|
+      hash_result[player_id] +=1
+    end
+
+    self.season.update(completed: true, player_id: self.player_id) if hash_result.values.include?(10)
+  end
 
   def winner
     Player.find(self.player_id)
