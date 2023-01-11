@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       get :score
     end
   end
-  resources :games do 
+  resources :games, except: [:index] do 
     member do
       get :in_game
     end
@@ -17,7 +17,9 @@ Rails.application.routes.draw do
 
   put "estado/:id", to: "games#estado", as: "estado"
 
-  resources :deaths, only: [:create]
+  resources :deaths, only: [:create, :destroy]
+
+  resources :seasons, only: [:index, :show]
 # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 #root to: "home#index"

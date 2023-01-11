@@ -1,0 +1,22 @@
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Ganador</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @seasons.each do |season| %>
+      <tr>
+          <td><%= link_to "#{season.name}", season %></td>
+          <% if season.player_id %>
+            <td> <%= Player.find(season.player_id).name %></td>
+          <% else %>
+            <td>La temporada sigue en curso</td>
+          <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

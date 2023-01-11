@@ -1,10 +1,7 @@
 class GamesController < ApplicationController
 
     before_action :set_game, only: [:in_game, :update, :estado]
-    
-    def index
-        @games = Game.all
-    end
+
     
     def new
         @game = Game.new
@@ -27,7 +24,7 @@ class GamesController < ApplicationController
 
     def update 
         if @game.update(game_params)
-            redirect_to games_path, notice:"Juego guardado"
+            redirect_to in_game_game_path(@game), notice:"Juego guardado"
         else
             render :in_game
         end

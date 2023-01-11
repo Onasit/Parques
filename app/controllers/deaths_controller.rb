@@ -10,6 +10,18 @@ class DeathsController < ApplicationController
         end
     end
 
+    def destroy
+        @game = Game.find(params[:game_id])
+
+        @game.deaths.last.destroy if @game.deaths.present?
+
+        respond_to do |format|
+            format.html { redirect_back fallback_location: root_path,
+                          notice: 'Ultima muerte eliminada' }
+        end
+
+    end
+
 
     private
 

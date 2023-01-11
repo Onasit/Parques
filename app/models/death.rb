@@ -5,10 +5,12 @@ class Death < ApplicationRecord
   belongs_to :game
 
   before_save :check_first_blood
+  #before_destroy :check_deaths
 
   validate :auto_kill
 
   validate :soplo_cochinas
+
   
   scope :first_blood, -> { where(first_blood: true) }
 
@@ -17,6 +19,11 @@ class Death < ApplicationRecord
       self.first_blood = true
     end
   end
+
+  # def check_deaths
+  #   if game.deaths.blank?
+  #   end
+  # end
 
   private
 

@@ -55,14 +55,24 @@
         </div>
       </div>
 
-      <a>
-        <%= link_to 'Pausar', estado_path(@game), method: :put, data: { confirm: '¿Seguro quieres Pausar?' }, class: 'btn btn-primary my-3' %>
-      </a>
+
 
   <% end %>
-  
 
+  
 <% end %>
+
+  <br>
+
+    <%= link_to 'Eliminar ultima muerte', death_path(game_id: @game.id), method: :delete, data: { confirm: '¿estas seguro?' }, class: 'btn btn-danger' %>
+  <% if @game.deaths.present? %>
+  <% end %>
+  
+  <br>
+
+  <a>
+    <%= link_to 'Pausar', estado_path(@game), method: :put, data: { confirm: '¿Seguro quieres Pausar?' }, class: 'btn btn-primary my-3' %>
+  </a>
 
 
 <div class="row">
