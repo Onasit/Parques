@@ -58,10 +58,6 @@
 
 
   <% end %>
-
-  
-<% end %>
-
   <br>
 
     <%= link_to 'Eliminar ultima muerte', death_path(game_id: @game.id), method: :delete, data: { confirm: '¿estas seguro?' }, class: 'btn btn-danger' %>
@@ -73,6 +69,10 @@
   <a>
     <%= link_to 'Pausar', estado_path(@game), method: :put, data: { confirm: '¿Seguro quieres Pausar?' }, class: 'btn btn-primary my-3' %>
   </a>
+
+  
+<% end %>
+
 
 
 <div class="row">
@@ -171,14 +171,14 @@
 <% case %> 
   <% when !@game.player_id.blank? %>
       <p><%= mensaje_final(@game) %> </p>
-      <%= link_to 'Volver', games_path, class: 'btn btn-secondary' %>
+      <%= link_to 'Volver', season_path(@game.season), class: 'btn btn-secondary' %>
 
   <% when @game.paused? && !current_player.blank? %>
       <p>Partida pausada por <%= Player.find(@game.pauser_id).name %>  </p>
       <% if @game.pauser_id == current_player.id %>
         <%= link_to 'Reanudar', estado_path(@game), method: :put, data: { confirm: '¿Quieres reanudar?' }, class: 'btn btn-primary my-3' %>
       <% end %>
-      <%= link_to 'Volver', games_path, class: 'btn btn-secondary' %>
+      <%= link_to 'Volver', season_path(@game.season), class: 'btn btn-secondary' %>
 
   <% when @game.player_id.blank? && !@game.paused? && !current_player.blank? %>
       <%= form_with(model: @game) do |form| %>

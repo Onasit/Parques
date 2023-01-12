@@ -20,13 +20,13 @@ Rails.application.routes.draw do
   resources :deaths, only: [:create, :destroy]
 
   resources :seasons, only: [:index, :show]
-# For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-#root to: "home#index"
+  #root to: "home#index"
 
-root to: "players#index"
-# get "index", to: 'players#index'
+  root to: "players#index"
+  # get "index", to: 'players#index'
 
-# get "show", to: 'players#show'
+  # get "show", to: 'players#show'
 
 end

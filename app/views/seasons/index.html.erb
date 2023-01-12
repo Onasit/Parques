@@ -10,7 +10,7 @@
       <tr>
           <td><%= link_to "#{season.name}", season %></td>
           <% if season.player_id %>
-            <td> <%= Player.find(season.player_id).name %></td>
+            <td> <%= season.player.name %></td>
           <% else %>
             <td>La temporada sigue en curso</td>
           <% end %>
