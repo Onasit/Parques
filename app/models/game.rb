@@ -6,7 +6,7 @@ class Game < ApplicationRecord
   belongs_to :season
 
 
-
+  scope :in_season, -> (season_id) { where(season_id: season_id) }
 
   
   accepts_nested_attributes_for :player_games, allow_destroy: true

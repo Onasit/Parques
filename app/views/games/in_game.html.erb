@@ -126,7 +126,7 @@
           <tr>
 
             <td><%= pj.player.name %></td>
-            <td>$<%= pj.cash %></td>
+            <td>$<%= pj.cash(@game.season) %></td>
 
           </tr>
         <% end %>

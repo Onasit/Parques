@@ -28,7 +28,7 @@
             <td><%= player.victim_counter_in_season(@season) %></td>
             <td><%= verdugo&.first %>: <%= verdugo&.last %></td>
             <td><%= presa&.first %>: <%= presa&.last %></td>
-            <td><%= player.finanzas %></td>
+            <td><%= player.finanzas(@season) %></td>
         </tr>
         <% end %>
     </tbody>
