@@ -3,19 +3,36 @@ class Player < ApplicationRecord
   has_many :player_games
   has_many :games, through: :player_games
   has_many :won_games, class_name: "Game", foreign_key: "player_id"
+  has_many :seasons
 
   mount_uploader :image, PlayerUploader
+
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-        
-  def assassin_counter
-    Death.where(assassin_id: self.id).count
+
+  
+  
+  
+  def deaths_from_season(deaths, season)
+    deaths.select {|d| season.games.pluck(:id).include?(d.game_id) }
   end
-  def victim_counter
-    Death.where(victim_id: self.id).count
+  
+  def assassin_counter_in_season(season)
+    @deaths = Death.where(assassin_id: self.id)
+    deaths_from_season(@deaths, season).count
+  end
+
+  def victim_counter_in_season(season)
+    @deaths = Death.where(victim_id: self.id)
+    deaths_from_season(@deaths, season).count
+  end
+
+  def won_games_for_season(season)
+    self.won_games.where(season_id: season.id)
+    
   end
 
   def finanzas_games_ganados
@@ -46,10 +63,11 @@ class Player < ApplicationRecord
     finanzas_games_ganados + finanzas_muertes - finanzas_games_perdidos
   end
 
-  def verdugos
+
+  def verdugos(season)
     verdugos = []
     Death.where(victim_id: self.id).each do |muertes|
-      verdugos.push(muertes.assassin.name)
+      verdugos.push(muertes.assassin.name) if season.games.include?(muertes.game)
     end
 
     verdugos_hash = Hash.new(0)
@@ -61,10 +79,10 @@ class Player < ApplicationRecord
     verdugos_hash.sort_by{|verdugo, muertes| muertes}.reverse.to_h
   end
 
-  def presas
+  def presas(season)
     presas = []
     Death.where(assassin_id: self.id).each do |muertes|
-      presas.push(muertes.victim.name)
+      presas.push(muertes.victim.name) if season.games.include?(muertes.game)
     end
 
     presas_hash = Hash.new(0)
@@ -76,24 +94,10 @@ class Player < ApplicationRecord
     presas_hash.sort_by{|presa, muertes| muertes}.reverse.to_h
   end
 
-  def racha_victorias
-    contador = 0
-    racha_maxima = 0
-    Game.pluck(:player_id). each do |ganador_id|
-      if self.id == ganador_id
-        contador = contador + 1
-        if contador > racha_maxima
-          racha_maxima = contador
-        end
-      else 
-        contador = 0
-      end
-    end
-      racha_maxima
-  end
 
-  def soplos
-    Death.where(victim_id: self.id, soplo: true).count
+  def soplos_in_season(season)
+    Death.where(victim_id: self.id, soplo: true)
+    deaths_from_season(@deaths, season).count
   end
 
 end

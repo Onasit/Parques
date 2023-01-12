@@ -1,3 +1,42 @@
+<div class="container">
+    <h1>Score</h1>
+
+    <table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+        <th scoope="col">Posición</th>
+        <th scoope="col">Nombre</th>
+        <th scoope="col">Puntos</th>
+        <th scoope="col">Asesinatos</th>
+        <th scoope="col">Muertes</th>
+        <th scoope="col">Verdugo</th>
+        <th scoope="col">Presa facil</th>
+        <th scoope="col">Finanzas</th>
+        <th scoope="col" colspan="3"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @players.each_with_index do |player, index| %>
+        <tr>
+            <% verdugo = player.verdugos(@season).first %>
+            <% presa = player.presas(@season).first %>
+            <td><%= index + 1 %></td>
+            <td><%= player.name %></td>
+            <td><%= player.won_games_for_season(@season).count %></td>
+            <td><%= player.assassin_counter_in_season(@season) %></td>
+            <td><%= player.victim_counter_in_season(@season) %></td>
+            <td><%= verdugo&.first %>: <%= verdugo&.last %></td>
+            <td><%= presa&.first %>: <%= presa&.last %></td>
+            <td><%= player.finanzas %></td>
+        </tr>
+        <% end %>
+    </tbody>
+    </table>
+
+
+</div>
+
 <div class="row">
     <% @games.each do |game| %>
             
