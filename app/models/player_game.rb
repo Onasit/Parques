@@ -9,9 +9,9 @@ class PlayerGame < ApplicationRecord
     cash_first_blood = 0
     first_death = self.game.deaths.first_blood.first
     
-    deaths = Death.where(assassin_id: self.player.id, game_id: self.game_id, first_blood: false)
+    deaths = Death.where(assassin_id: self.player.id, game_id: self.game_id, first_blood: false).includes(:game)
     assassin_counter = deaths.select {|d| d.game.season_id == season.id }.count
-    deaths = Death.where(victim_id: self.player.id, game_id: self.game_id, first_blood: false)
+    deaths = Death.where(victim_id: self.player.id, game_id: self.game_id, first_blood: false).includes(:game)
     victim_counter = deaths.select {|d| d.game.season_id == season.id }.count
 
     case 

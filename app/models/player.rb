@@ -21,16 +21,16 @@ class Player < ApplicationRecord
   end
 
   def gamed_in_season(season)
-    self.games.in_season(season.id)
+    self.games.in_season(season.id).includes(:player_games)
   end
   
   def assassin_counter_in_season(season)
-    deaths = Death.where(assassin_id: self.id)
+    deaths = Death.where(assassin_id: self.id).includes(:game)
     deaths_from_season(deaths, season).count
   end
 
   def victim_counter_in_season(season)
-    deaths = Death.where(victim_id: self.id)
+    deaths = Death.where(victim_id: self.id).includes(:game)
     deaths_from_season(deaths, season).count
   end
 
@@ -42,7 +42,7 @@ class Player < ApplicationRecord
   
   def verdugos(season)
     verdugos = []
-    Death.where(victim_id: self.id).each do |muertes|
+    Death.where(victim_id: self.id).includes(:game).each do |muertes|
       verdugos.push(muertes.assassin.name) if season.games.include?(muertes.game)
     end
     
@@ -57,7 +57,7 @@ class Player < ApplicationRecord
   
   def presas(season)
     presas = []
-    Death.where(assassin_id: self.id).each do |muertes|
+    Death.where(assassin_id: self.id).includes(:game).each do |muertes|
       presas.push(muertes.victim.name) if season.games.include?(muertes.game)
     end
     
@@ -72,13 +72,13 @@ class Player < ApplicationRecord
   
   
   def soplos_in_season(season)
-    Death.where(victim_id: self.id, soplo: true)
+    Death.where(victim_id: self.id, soplo: true).includes(:game)
     deaths_from_season(@deaths, season).count
   end
 
   def finanzas_games_ganados(season)
     ganancias_games = 0
-    won_games_for_season(season).each do |game| 
+    won_games_for_season(season).includes(:game).each do |game| 
       ganancias_games += (game.players.count) * (game.game_cash)
     end
     ganancias_games
