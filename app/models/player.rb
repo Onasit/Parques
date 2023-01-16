@@ -78,7 +78,7 @@ class Player < ApplicationRecord
 
   def finanzas_games_ganados(season)
     ganancias_games = 0
-    won_games_for_season(season).includes(:game).each do |game| 
+    won_games_for_season(season).includes(:players).each do |game| 
       ganancias_games += (game.players.count) * (game.game_cash)
     end
     ganancias_games
