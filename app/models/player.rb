@@ -72,8 +72,8 @@ class Player < ApplicationRecord
   
   
   def soplos_in_season(season)
-    Death.where(victim_id: self.id, soplo: true).includes(:game)
-    deaths_from_season(@deaths, season).count
+    @deaths = Death.where(victim_id: self.id, soplo: true).includes(:game)
+    deaths_from_season(@deaths, season)&.count
   end
 
   def finanzas_games_ganados(season)
