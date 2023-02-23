@@ -5,30 +5,37 @@
         </div>
         <div class="col-md-5">
             <h1><%= @player.name %></h1>
-            <table class="table table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                    <th scoope="col">Color</th>
-                    <th scoope="col">Puntos</th>
-                    <th scoope="col">Asesinatos</th>
-                    <th scoope="col">Muertes</th>
-                    <th scoope="col">Finanzas</th>
-                    <th scoope="col">Soplos</th>
-                    <th scoope="col" colspan="3"></th>
-                    </tr>
-                </thead>
+            <% @seasons.each do |season| %>
+              <h1><%= season.name %></h1>
+              <table class="table table-striped">
+                  <thead class="thead-dark">
+                      <tr>
+                      <th scoope="col">Puntos</th>
+                      <th scoope="col">Asesinatos</th>
+                      <th scoope="col">Muertes</th>
+                      <th scoope="col">Verdugo</th>
+                      <th scoope="col">Presa facil</th>
+                      <th scoope="col">Finanzas</th>
+                      <th scoope="col">Soplos</th>
+                      <th scoope="col" colspan="3"></th>
+                      </tr>
+                  </thead>
 
-                <tbody>
-                    <tr>
-                        <td><%= @player.color %></td>
-                        <td><%= @player.won_games.count %></td>
-                        <td><%= @player.assassin_counter %></td>
-                        <td><%= @player.victim_counter %></td>
-                        <td><%= @player.finanzas %></td>
-                        <td><%= @player.soplos %></td>
-                    </tr>
-                </tbody>
-            </table>
+                  <tbody>
+                      <tr>
+                          <% verdugo = @player.verdugos(season).first %>
+                          <% presa = @player.presas(season).first %>
+                          <td><%= @player.won_games_for_season(season).count %></td>
+                          <td><%= @player.assassin_counter_in_season(season) %></td>
+                          <td><%= @player.victim_counter_in_season(season) %></td>
+                          <td><%= verdugo&.first %>: <%= verdugo&.last %></td>
+                          <td><%= presa&.first %>: <%= presa&.last %></td>
+                          <td><%= @player.finanzas(season) %></td>
+                          <td><%= @player.email %></td>
+                      </tr>
+                  </tbody>
+              </table>
+            <% end %>
 
             <table class="table table-striped">
             
@@ -44,27 +51,6 @@
                     <% @player.verdugos.each do |verdugo, muertes| %>
                         <tr>
                             <td><%= verdugo %></td>
-                            <td><%= muertes %></td>
-                        </tr>
-                    <% end %>
-                </tbody>
-            
-            </table> 
-
-            <table class="table table-striped">
-            
-                <thead class="thead-dark">
-                    <tr>
-                        <th scoope="col">Presas</th>
-                        <th scoope="col">Numero de muertes</th>
-                        <th scoope="col" colspan="3"></th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <% @player.presas.each do |presa, muertes| %>
-                        <tr>
-                            <td><%= presa %></td>
                             <td><%= muertes %></td>
                         </tr>
                     <% end %>

@@ -7,7 +7,7 @@ class PlayersController < ApplicationController
     end
 
     def show
-       
+       @seasons = Season.all
     end
     def score
         @players = Player.all.sort_by{|e| e.won_games.count}.reverse
