@@ -19,6 +19,8 @@ class Game < ApplicationRecord
 
   validate :repeat_players
 
+  after_update :send_email
+
 
   #after_save :check_end_season
 
@@ -61,6 +63,14 @@ class Game < ApplicationRecord
   def validate_player_uniqueness
     unless self.player_games.uniq == self.player_games
       errors.add(:base, "No se puede repetir jugadores")
+    end
+  end
+
+  def send_email
+    if self.player_id.present?
+      self.players.each do |player|
+        PlayerMailer.with(player: player, game: self).finish_game_email.deliver!
+      end
     end
   end
 
