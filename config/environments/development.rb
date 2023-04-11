@@ -34,11 +34,13 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-
+  config.action_mailer.raise_delivery_errors = true # envio de correo lanza errores si hay algun problema
+  config.action_mailer.default_url_options = { host: 'localhost:3000' } # por si se van a utilizar enlaces
   config.action_mailer.perform_caching = false
+  config.action_mailer.perform_deliveries = true # realice entregas
+  config.action_mailer.delivery_method = :letter_opener #el tipo de mailer que se esta utilizando (gema)
 
-  # Print deprecation notices to the Rails logger.
+  # Print deprecation notices to the Rails logger.  
   config.active_support.deprecation = :log
 
   # Raise exceptions for disallowed deprecations.
